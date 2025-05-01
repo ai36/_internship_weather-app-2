@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(1 * var(--size));
+  padding: calc(2 * var(--size));
+}
+
+@media (width < 1024px) {
+  .header {
+    padding: calc(1.5 * var(--size));
+  }
+}
+
+@media (width < 768px) {
+  .header {
+    padding: calc(1 * var(--size));
+  }
+}

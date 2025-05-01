@@ -1,0 +1,13 @@
+@media (width < 1024px) {
+  .header__logo-Img {
+    width: calc(3.375 * var(--size));
+    height: calc(3 * var(--size));
+  }
+}
+
+@media (width < 768px) {
+  .header__logo-Img {
+    width: calc(2 * var(--size));
+    height: calc(2 * var(--size));
+  }
+}
