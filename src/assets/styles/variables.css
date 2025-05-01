@@ -1,0 +1,46 @@
+:root {
+  /* fonts */
+  --font-family-primary: 'Raleway', sans-serif;
+  --font-size-primary: 20px;
+  --font-size-additional: 12px;
+  --font-size-medium-title: 24px;
+  --font-size-big-title: 112px;
+  --font-size-small-title: 16px;
+  --font-size-value: 32px;
+  --font-weight-primary: 400;
+  --font-weight-bold: 700;
+  --line-height-primary: 1.2;
+  --line-height-one: 1;
+  --line-height-slider: 1.25;
+  --line-height-additional: 1.33333;
+  --line-height-info: 1.14286;
+
+  /* fonts-media */
+  --font-size-media-small: 14px;
+  --font-size-media-medium-title: 16px;
+  --font-size-media-big-title: 56px;
+  --font-size-media-small-title: 12px;
+  --font-size-media-value: 22px;
+  --font-size-media-additional: 10px;
+
+  /* colors */
+  --text-color-primary: #202020;
+  --text-color-additional: #393939;
+  --text-color-placeholder: #707070;
+  --text-color-link: #a6a6a6;
+  --white-color: #f5f4f4;
+
+  --bg-light-transparent: rgba(245, 244, 244, 0.4);
+  --bg-form-active: rgba(218, 218, 218, 1);
+
+  --transition-duration: .2s;
+  --transition: color var(--transition-duration),
+  fill var(--transition-duration),
+  border-color var(--transition-duration),
+  background-color var(--transition-duration),
+  opacity var(--transition-duration);
+
+  --size: 16px; /* calc(1 * var(--size)) */
+
+  --netural-700: #545454;
+}

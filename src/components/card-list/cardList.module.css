@@ -1,0 +1,27 @@
+.weather-today__details {
+  max-width: 506px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, 158px);
+  grid-template-rows: repeat(2, 196px);
+  gap: calc(1 * var(--size));
+}
+
+@media (width < 1024px) {
+  .details {
+    grid-template-columns: repeat(3, 163px);
+    grid-template-rows: repeat(2, 196px);
+    gap: calc(.75 * var(--size));
+    justify-content: center;
+  }
+}
+
+@media (width < 768px) {
+  .details {
+    grid-template-columns: minmax(98px, 128px) minmax(98px, 128px) minmax(98px, 128px);
+    grid-template-rows: repeat(2, 148px);
+    gap: calc(.5 * var(--size));
+  }
+}
