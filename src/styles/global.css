@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  margin: 0;
+  height: 100%;
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  
+  font-family: 'Raleway', sans-serif;
+  font-variant-numeric: lining-nums;
+
+  transition: width 5s;
+  background-image: url('./../../public/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  &:has(.searchMode) {
+    overflow-y: hidden;
+  }
+}
+
+input, button {
+  font: inherit;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.progressbar,
+.progressbar__visibility {
+    -webkit-appearance: none;
+    width: 126px;
+    height: 8px;
+    gap: 10px;
+    border-radius: 8px;
+    width: 100%;
+    background: #DADADA66;
+}
+
+.progressbar__visibility {
+    background: radial-gradient(50% 9453.13% at 50% 50%, rgba(84, 84, 84, 0.4) 0%, rgba(138, 138, 138, 0.4) 45.12%, #DADADA 100%, rgba(218, 218, 218, 0.4) 100%);
+}
+
+.progressbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #F5F4F4;
+}
+
+.progressbar__visibility::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #F5F4F4;
+}
+
+.progressbar::-webkit-progress-value {
+    background: transparent;
+}
+
+.progressbar__visibility::-webkit-progress-value {
+    background: transparent;
+}

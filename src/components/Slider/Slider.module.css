@@ -1,0 +1,231 @@
+.slider {
+  margin-inline: 88px;
+}
+
+.sliders {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  overflow: hidden;
+
+  margin-top: clamp(1.5rem, 0.75rem + 1.56vw, 2rem);
+}
+
+.slider__move-btn {
+  position: absolute;
+  width: 56px;
+  height: 48px;
+
+  background: var(--card-bg-color);
+  border: none;
+  border-radius: var(--border-radius);
+
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slider__move-btn--left {
+  left: 0;
+}
+
+.slider__move-btn--right {
+  transform: rotate(180deg);
+  right: 0;
+}
+
+.slider__move-btn:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+li {
+  list-style: none;
+}
+
+.slider__move-btn-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.slider {
+  width: calc(1120px - 240px);
+
+  height: 64px;
+
+  mask-image: linear-gradient(90deg, #000 97%, transparent 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.slider__cards {
+  position: relative;
+
+  display: flex;
+  gap: 1rem;
+
+  padding: 0;
+  margin: 0;
+}
+
+.slider__card {
+  background: var(--card-bg-color);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1rem;
+  height: calc(32px);
+
+  border-radius: var(--border-radius);
+
+  padding: 1rem;
+}
+
+.slider__card-time {
+  color: var(--dark-color);
+  line-height: 125%;
+  white-space: nowrap;
+
+  margin: 0;
+}
+
+.slider__card-weather-type {
+  width: 2rem;
+  height: 2rem;
+}
+
+.slider__card-temperature {
+  color: var(--dark-color);
+  line-height: 125%;
+  white-space: nowrap;
+
+  margin: 0;
+}
+
+.slider__card-temperature-range {
+  color: var(--dark-color);
+  line-height: 125%;
+  white-space: nowrap;
+
+  margin: 0;
+}
+
+@media (max-width: 886px) {
+  .slider__cards {
+    gap: 0.75rem;
+  }
+
+  .slider {
+    margin-inline: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider__cards {
+    gap: clamp(0.5rem, -0.75rem + 3.13vw, 0.75rem);
+  }
+
+  .forecast-slider__selection-btn {
+    font-size: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+  }
+
+  .forecast-slider__selection-btn::after {
+    height: clamp(0.063rem, -0.25rem + 0.78vw, 0.125rem);
+  }
+
+  .sliders {
+    height: clamp(6.5rem, -3.5rem + 25vw, 8.5rem);
+    margin-top: clamp(1rem, -1.5rem + 6.25vw, 1.5rem);
+  }
+
+  .slider {
+    height: clamp(6.5rem, -3.5rem + 25vw, 8.5rem);
+    margin-inline: clamp(3.5rem, -4rem + 18.75vw, 5rem);
+  }
+
+  .slider__move-btn {
+    width: clamp(2.5rem, -2.5rem + 12.5vw, 3.5rem);
+    height: clamp(2rem, -3rem + 12.5vw, 3rem);
+
+    top: clamp(2.25rem, -0.25rem + 6.25vw, 2.75rem);
+  }
+
+  .slider__move-btn-icon {
+    width: clamp(1rem, -1.5rem + 6.25vw, 1.5rem);
+    height: clamp(1rem, -1.5rem + 6.25vw, 1.5rem);
+  }
+
+  .slider__card {
+    height: clamp(5rem, -2.5rem + 18.75vw, 6.5rem);
+    flex-direction: column;
+
+    gap: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+    padding: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+  }
+
+  .slider__card-time {
+    font-size: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+    line-height: 100%;
+  }
+
+  .slider__card-weather-type {
+    width: clamp(1.5rem, -1rem + 6.25vw, 2rem);
+    height: clamp(1.5rem, -1rem + 6.25vw, 2rem);
+  }
+
+  .slider__card-temperature,
+  .slider__card-temperature-range {
+    font-size: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+    line-height: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .sliders {
+    height: 48px;
+  }
+
+  .slider {
+    height: 48px;
+  }
+
+  .slider__card {
+    flex-direction: row;
+    height: 16px;
+
+    padding: 1rem 0.75rem;
+  }
+  .slider__move-btn {
+    top: 7px;
+  }
+}
+
+@media (max-width: 375px) {
+  .sliders {
+    height: 104px;
+  }
+
+  .slider {
+    height: 104px;
+  }
+
+  .slider__card {
+    flex-direction: column;
+    height: 80px;
+
+    padding: 0.75rem;
+  }
+  .slider__move-btn {
+    top: 36px;
+  }
+}
