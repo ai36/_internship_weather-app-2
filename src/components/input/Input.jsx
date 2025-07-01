@@ -1,53 +1,53 @@
-import { Icon } from '../../components';
-import { useState } from 'react';
-import styles from './input.module.css';
+import styles from './Input.module.css';
+import { Icon } from '@components/Icon';
+import IMAGE_NAMES from '@constants/IMAGE_NAMES';
 
-export const Input = () => {
-  const [inputIsFocused, setInputIsFocused] = useState(false);
-  const [inputIsEmpty, setInputIsEmpty] = useState(true);
-
-  const handleInputFocus = () => {
-    setInputIsFocused(true);
-  }
-
-  const handleInputBlur = () => {
-    setInputIsFocused(false);
-  }
-
-  const handleOnChange = (e) => {
-    if(e.target.value) {
-      setInputIsEmpty(false);
-    } else {
-      setInputIsEmpty(true);
-    }
-  }
-
-  const handleFormReset = () => {
-    setInputIsEmpty(true);
-    setInputIsFocused(false);
-  }
-
-  const handleInputOutput = (e) => {
-    console.log(e.target.value);
-  }
-
+export const Input = ({
+  value,
+  onChange,
+  placeholder,
+  inputRef,
+  onSubmit,
+  onReset,
+  active,
+}) => {
   return (
-    <form className={`${styles['header__search-form']} ${styles['search-form']}`} onSubmit={(e) => e.preventDefault()} onReset={handleFormReset}>
+    <form
+      onSubmit={onSubmit}
+      onReset={onReset}
+      action="#"
+      className={`${styles['search-form']} ${active && styles.focus}`}
+      id="id-header-search-form"
+    >
       <input
-        className={styles['search-form__input']}
-        type='text'
-        placeholder='Поиск по городу'
-        onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
-        onChange={handleOnChange}
-        onInput={handleInputOutput}
+        value={value}
+        onChange={onChange}
+        onInput={onChange}
+        placeholder={placeholder}
+        type="text"
+        autoComplete="off"
+        className={styles.input}
+        ref={inputRef}
+        required
       />
-      <button
-        className={`${styles['search-form__btn']}`}
-        type={inputIsFocused || !inputIsEmpty ? "reset" : "button"}
-        >
-        <Icon iconName={inputIsFocused || !inputIsEmpty ? "close" : "search"} />
-      </button>
+      {active || value !== '' ? (
+        <button className={styles['search-form__btn']} type="reset">
+          <Icon
+            name={IMAGE_NAMES.close}
+            id="id-header-search-icon"
+            className={styles['search-form__btn-icon']}
+          />
+        </button>
+      ) : (
+        <button className={styles['search-form__btn']} type={'button'} disabled>
+          {!active || !value}
+          <Icon
+            name={IMAGE_NAMES.search}
+            id="id-header-search-icon"
+            className={styles['search-form__btn-icon']}
+          />
+        </button>
+      )}
     </form>
   );
 };
