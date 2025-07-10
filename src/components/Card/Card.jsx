@@ -1,4 +1,4 @@
-import styles from './card1.module.css'
+import styles from './card.module.css'
 
 export const Card = ({ children }) => {
   return (

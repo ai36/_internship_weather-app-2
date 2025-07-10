@@ -5,7 +5,7 @@ import { getFormattedTime, getLocalDate } from '../../utils/cardsUtils';
 import { MockCityCard } from './MockCityCard';
 import { capitalize } from '../../utils/capitalize.js';
 
-import styles from './cityCard1.module.css';
+import styles from './cityCard.module.css';
 
 export const CityCard = () => {
   const { data, cityName } = useContext(DataCityContext);
