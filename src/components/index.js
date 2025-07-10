@@ -8,7 +8,7 @@ export * from './CityList/CityList';
 export * from './TabBar/TabBar';
 export * from './Slider/Slider';
 export * from './Icon/Icon';
-export * from './Dropdown1/Dropdown1';
+export * from './Dropdown/Dropdown';
 export * from './DropdownContent/DropdownContent';
 export * from './UI';
 export * from './WeatherSearch/WeatherSearch';
