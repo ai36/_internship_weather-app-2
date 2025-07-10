@@ -5,7 +5,7 @@ import { WeatherSearch, DropdownContent } from '../../components';
 import { HeadContext, DataCityContext, Context } from '../../context';
 import { Storage, prepareArray } from '../../utils';
 
-import styles from './header1.module.css';
+import styles from './header.module.css';
 
 export const Header = () => {
   const {
