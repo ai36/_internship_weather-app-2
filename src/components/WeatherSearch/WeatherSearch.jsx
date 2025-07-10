@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Dropdown, Icon, DropdownContent } from '../../components';
+import { Dropdown1, Icon, DropdownContent } from '../../components';
 import { Input, ButtonBasket } from '../UI';
 import { HeadContext, Context } from '../../context';
 
@@ -73,7 +73,7 @@ export const WeatherSearch = ({ onChooseCity }) => {
         {value && <Icon icon='clear' className={styles.icon} />}
         {!value && <Icon icon='search' className={styles.icon} />}
       </Input>
-      <Dropdown />
+      <Dropdown1 />
     </div>
   );
 };
