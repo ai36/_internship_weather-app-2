@@ -12,7 +12,7 @@ import {
 } from '../../utils/cardsUtils';
 import { MockCityList } from './MockCityList';
 
-import styles from './cityList.module.css';
+import styles from './cityList1.module.css';
 
 export const CityList = () => {
   const { data } = useContext(DataCityContext);
