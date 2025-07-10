@@ -1,20 +1,23 @@
-import { Header } from '@components/Header';
-import { Layout } from '@components/Layout';
-import { Main } from '@components/Main';
-import { Footer } from '@components/Footer';
-import { WeatherProvider } from '@contexts/';
-import { AppProvider } from '@contexts/AppContext';
+import { Header, Layout, Card, Main, Footer, Slider } from './components';
+import { AppContext, HeaderContext, DataContext } from './context';
 
-export const App = () => {
+function App() {
   return (
-    <AppProvider>
+    <AppContext>
       <Layout>
-        <WeatherProvider>
-          <Header />
-          <Main />
+        <Card>
+          <DataContext>
+            <HeaderContext>
+              <Header />
+            </HeaderContext>
+            <Main />
+            <Slider />
+          </DataContext>
           <Footer />
-        </WeatherProvider>
+        </Card>
       </Layout>
-    </AppProvider>
+    </AppContext>
   );
-};
+}
+
+export default App;

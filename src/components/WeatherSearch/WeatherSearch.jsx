@@ -1,108 +1,79 @@
-import styles from './WeatherSearch.module.css';
-import { Input } from '@components/Input';
-import validateRussianInput from '@utils/validateRussianInput';
-import { useRef, useState } from 'react';
-import { useAppContext, useClickOutside, useWeatherContext } from '@/hooks';
-import { DropDown } from '@components/DropDown';
+import { useContext } from 'react';
+import { Dropdown, Icon, DropdownContent } from '../../components';
+import { Input, ButtonBasket } from '../UI';
+import { HeadContext, Context } from '../../context';
 
-export const WeatherSearch = () => {
-  const [value, setValue] = useState('');
-  const { searchMode, setSearchMode } = useAppContext();
-  const ref = useRef(null);
-  const containerRef = useRef(null);
-  const {
-    setCity,
-    setCityData,
-    addToRecent,
-    clearRecent,
-    clearCityFound,
-    coordsLoading,
-    recent,
-    cityFound,
-  } = useWeatherContext();
+import styles from './weatherSearch.module.css';
 
-  const closeDropdown = () => {
-    setSearchMode(false);
-  };
+export const WeatherSearch = ({ onChooseCity }) => {
+  const { value, setValue, isLoading, setSearchOpen } = useContext(Context);
+  const { setDropDownContent, localData, setLocalData } =
+    useContext(HeadContext);
 
-  useClickOutside(containerRef, closeDropdown, searchMode);
-
-  const focusHandler = () => {
-    setSearchMode(true);
-  };
-
-  const inputHandler = (evt) => {
-    setValue(evt.target.value);
-    const isRussianText = validateRussianInput(evt.target.value);
-    if (isRussianText) {
-      ref.current.setCustomValidity('');
-    } else {
-      ref.current.setCustomValidity(
-        'Запрос должен быть введён на русском языке'
-      );
-    }
-    if (evt.target.value === '') {
-      clearCityFound();
-      if (cityFound.name !== '') {
-        setCity('');
+  const dropDownBlock = localData.length ? (
+    <DropdownContent
+      title={'Недавно смотрели'}
+      icon={
+        <ButtonBasket handleClick={onDelete} type={'button'} disabled={false} />
       }
-    }
-  };
-  
-  const clearHandler = (evt) => {
-    if (searchMode && !value) {
-      setSearchMode(false);
-      return;
-    }
-    evt.preventDefault();
-    setValue('');
-    clearCityFound();
-    if (cityFound.name !== '') {
-      setCity('');
-    }
-  };
+      items={localData}
+      onChoose={onChooseCity}
+      className={'item'}
+    />
+  ) : (
+    <DropdownContent
+      title={'Недавно смотрели'}
+      icon={<ButtonBasket type={'button'} disabled={true} />}
+      items={[{ name: 'История поиска пустая.' }]}
+      className={'notFound'}
+    />
+  );
 
-  const clickHandler = (value) => {
-    addToRecent(value);
-    setCityData(value);
-    setValue('');
-    clearCityFound();
-    if (cityFound.name !== '') {
-      setCity('');
-    }
-    setSearchMode(false);
-  };
-
-  const submitHandler = (evt) => {
-    evt.preventDefault();
-    setCity(value);
-  };
-
-  return (
-    <div
-      className={styles.weatherSearch}
-      onFocus={focusHandler}
-      ref={containerRef}
-    >
-      <Input
-        value={value}
-        onChange={inputHandler}
-        onSubmit={submitHandler}
-        onReset={clearHandler}
-        placeholder="Поиск по городу"
-        inputRef={ref}
-        active={searchMode}
+  function onDelete(e) {
+    e.stopPropagation();
+    localStorage.removeItem('cities');
+    setLocalData([]);
+    setDropDownContent(
+      <DropdownContent
+        title={'Недавно смотрели'}
+        icon={<ButtonBasket type={'button'} disabled={true} />}
+        items={[{ name: 'История поиска пустая.' }]}
+        className={'notFound'}
       />
-      {searchMode && (
-        <DropDown
-          recent={recent}
-          loading={coordsLoading}
-          cityFound={cityFound}
-          onClick={clickHandler}
-          onResultClick={addToRecent}
-          onClear={clearRecent}
-        />
-      )}
+    );
+  }
+
+  const onChange = e => {
+    const newValue = e.target.value;
+    if (!newValue.match(/[A-Za-z]/g)) {
+      setValue(newValue);
+    }
+  };
+
+  const onClear = () => {
+    setValue('');
+  };
+
+  const handleClick = e => {
+    e.stopPropagation();
+    setDropDownContent(dropDownBlock);
+    setSearchOpen(true);
+  };
+  return (
+    <div className={styles.search} onClick={e => handleClick(e)}>
+      <Input
+        className={styles.input}
+        onChange={onChange}
+        value={value}
+        onClear={onClear}
+        placeholder='Поиск по городу'
+        type='search'
+        disabled={isLoading}
+      >
+        {value && <Icon icon='clear' className={styles.icon} />}
+        {!value && <Icon icon='search' className={styles.icon} />}
+      </Input>
+      <Dropdown />
     </div>
   );
 };

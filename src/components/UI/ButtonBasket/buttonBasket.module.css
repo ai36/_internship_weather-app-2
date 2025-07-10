@@ -1,0 +1,15 @@
+.icon {
+    cursor: pointer;
+}
+
+.icon path {
+    transition: stroke .3s ease;
+}
+
+.icon:hover path {
+    stroke: var(--black-text)
+}
+
+.icon:disabled path {
+    stroke: var(--background-icon-disabled);
+}

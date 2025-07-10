@@ -1,27 +1,16 @@
-import SLIDER_TYPES from '../../constants/SLIDER_TYPES';
+import { useContext } from 'react';
+import { CityCard, CityList } from '../../components';
+import { Context } from '../../context';
 
-
-import styles from './Main.module.css';
-
-import { useState } from 'react';
-import {CityCard} from "@components/CityCard";
-import {CardList} from "@components/CardList";
-import {TabBar} from "@components/TabBar";
-import {Slider} from "@components/Slider";
+import styles from './main.module.css';
 
 export const Main = () => {
-  const [activeSlider, setActiveSlider] = useState(SLIDER_TYPES.forOneDay);
-
+  const { searchOpen } = useContext(Context);
+  const style = `${styles.main} ${searchOpen ? 'filter' : ''}`;
   return (
-    <main>
-      <div className={styles.weather}>
-        <CityCard />
-        <CardList />
-      </div>
-      <section className={styles['forecast-slider']}>
-        <TabBar setActiveSlider={setActiveSlider} active={activeSlider} />
-        <Slider activeSlider={activeSlider} />
-      </section>
+    <main className={style}>
+      <CityCard />
+      <CityList />
     </main>
   );
-}
+};

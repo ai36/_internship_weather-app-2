@@ -1,52 +1,59 @@
-import IMAGE_NAMES from '@constants/IMAGE_NAMES';
-import styles from './CityCard.module.css';
-import { Icon } from '@components/Icon';
-import { WeatherContext } from '@contexts/WeatherContext';
-import { useContext } from 'react';
-import { getLocalDateTime } from '@utils';
+import { useContext, useState, useEffect } from 'react';
+import { Icon } from '../Icon/Icon';
+import { DataCityContext } from '../../context/DataContext';
+import { getFormattedTime, getLocalDate } from '../../utils/cardsUtils';
+import { MockCityCard } from './MockCityCard';
+import { capitalize } from '../../utils/capitalize.js';
+
+import styles from './cityCard.module.css';
 
 export const CityCard = () => {
-  const { forecast } = useContext(WeatherContext);
+  const { data, cityName } = useContext(DataCityContext);
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
 
-  const cityName = forecast?.name ?? '--';
+  useEffect(() => {
+    const date = new Date();
 
-  const localDateTime = getLocalDateTime(forecast?.timezone);
-  let localTime, localDate;
-  if(localDateTime) {
-    [localDate, localTime] = localDateTime;
-  } else {
-    [localDate, localTime] = ["--, -- --", "--:--"];
+    const optionsDate = { weekday: 'long', day: 'numeric', month: 'long' };
+    let formattedDate = date?.toLocaleDateString('ru-RU', optionsDate);
+    formattedDate =
+      formattedDate?.charAt(0).toUpperCase() + formattedDate?.slice(1);
+
+    const formattedTime =
+      data && data?.timezone
+        ? getFormattedTime(getLocalDate(new Date(), data?.timezone * 1000))
+        : '11:39';
+
+    setCurrentDate(formattedDate);
+    setCurrentTime(formattedTime);
+  }, [data]);
+
+  if (!data) {
+    return <MockCityCard />;
   }
 
-  const localTemp = forecast?.main.temp.toString().split(".")[0] ?? "--";
-  const localWeather = forecast?.weather[0].description ?? "--";
-  const localWeatherIcon = forecast?.weather[0].icon.toString() ?? "dayBrokenClouds";
-  const localFeelsLike = forecast?.main.feels_like.toString().split(".")[0] ?? "--";
+  const { main, weather } = data;
+  const icon = weather?.[0].icon;
+  const description =
+    weather?.[0].description?.[0].toUpperCase() +
+    weather?.[0].description.slice(1);
 
   return (
-    <section className={styles['weather-today']}>
-      <div className={styles['weather-today-block']}>
-        <p className={styles['weather-today__region']}>{cityName}</p>
-        <p className={styles['weather-today__date']}>{localDate}</p>
-        <p className={styles['weather-today__time']}>{localTime}</p>
+    <section className={styles.hero}>
+      <h2 className={styles.title}>{capitalize(cityName)}</h2>
+      <span className={styles.day}>{currentDate}</span>
+      <span className={styles.time}>{currentTime}</span>
+      <span className={styles.degree}>
+        <span className={styles.degreeCurrent}>{Math.round(main?.temp)}</span>°
+      </span>
+      <div className={styles.weather}>
+        <Icon icon={icon} className={styles.icon} alt='Иконка погоды' />
+        <span>{description}</span>
       </div>
-
-      <div className={styles['weather-today-block']}>
-        <p className={styles['weather-today__temperature']}>{localTemp}</p>
-      </div>
-
-      <div className={styles['weather-today-block']}>
-        <div className={styles['weather-today__weather-type']}>
-          <Icon
-            name={IMAGE_NAMES[localWeatherIcon]}
-            className={styles['weather-today__weather-type-img']}
-          />
-          <p className={styles['weather-today__weather-type-text']}>{localWeather}</p>
-        </div>
-        <p className={styles['weather-today__weather-feels']}>
-          Ощущается как {localFeelsLike}°
-        </p>
-      </div>
+      <span className={styles.feeling}>
+        Ощущается как {Math.round(main?.feels_like)}°
+      </span>
     </section>
   );
 };
