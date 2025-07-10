@@ -2,7 +2,7 @@ import { useContext, useRef } from 'react';
 import { HeadContext, Context } from '../../context';
 import useClickOutside from '../../hooks/useClickOutside';
 
-import styles from './dropdown.module.css';
+import styles from './dropdown1.module.css';
 
 export const Dropdown = () => {
   const dropRef = useRef(null);
