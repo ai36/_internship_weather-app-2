@@ -1,21 +1,25 @@
-import styles from './Footer.module.css';
+import { useContext } from 'react';
+import { Context } from '../../context/AppContext';
 
-export const Footer = () => {
+import styles from './footer.module.css';
+
+export const Footer = ({ href }) => {
+  const { searchOpen } = useContext(Context);
+  const style = `${styles.footer} ${searchOpen ? 'filter' : ''}`;
   return (
-    <footer className={styles['footer']}>
-      <div className={styles['footer-info']}>
-        <p className={styles['footer__about-project']}>
-          Проект выполнен в рамках стажировки&nbsp;
-          <a
-            href="https://preax.ru"
-            className={styles['preax-link']}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            PREAX
-          </a>
-        </p>
+    <footer className={style}>
+      <div>
+        Проект выполнен в рамках стажировки{' '}
+        <a
+          href={href ?? 'https://preax.ru'}
+          target='_blank'
+          rel='noreferrer'
+          className={styles.footerLink}
+        >
+          {' '}
+          PREAX{' '}
+        </a>
       </div>
     </footer>
   );
-}
+};

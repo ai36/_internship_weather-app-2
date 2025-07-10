@@ -1,34 +1,31 @@
 .footer {
-  height: clamp(4.25rem, 2.75rem + 3.13vw, 5.25rem);
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.footer__about-project {
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 125%;
-  color: var(--light-color);
-
-  text-align: center;
-
-  margin: 0;
-}
-.preax-link {
-  color: var(--light-color);
+  color: var(--white-text);
+  padding-top: 64px;
+  margin-bottom: 32px;
 }
 
-@media (max-width: 1024px) {
+.footerLink {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media all and (max-width: 1023px) {
   .footer {
-    height: 68px;
+    padding-top: 48px;
+    margin-bottom: 24px;
   }
 }
 
-@media (max-width: 768px) {
+@media all and (max-width: 767px) {
   .footer {
-    height: clamp(3rem, -3.25rem + 15.63vw, 4.25rem);
-  }
-  .footer__about-project {
-    font-size: clamp(0.75rem, -0.5rem + 3.13vw, 1rem);
+    font-size: 12px;
+    line-height: 133%;
+    padding-top: 32px;
+    margin-bottom: 16px;
   }
 }

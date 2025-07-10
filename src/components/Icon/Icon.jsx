@@ -1,70 +1,56 @@
 import {
-  LogoSvg,
-  LogoSmallSvg,
-  SearchSvg,
-  CloseSvg,
-  ArrowRightSvg,
-  PressureSvg,
-  HumiditySvg,
-  SunriseSvg,
-  SunsetSvg,
-  VisibilitySvg,
-  WindSvg,
-  DayClearSkySvg,
-  NightClearSkySvg,
-  DayFewCloudsSvg,
-  NightFewCloudsSvg,
-  DayScatteredCloudsSvg,
-  NightScatteredCloudsSvg,
-  DayBrokenCloudsSvg,
-  NightBrokenCloudsSvg,
-  DayShowerRainSvg,
-  NightShowerRainSvg,
-  DayRainSvg,
-  NightRainSvg,
-  DayThunderstormSvg,
-  NightThunderstormSvg,
-  DaySnowSvg,
-  NightSnowSvg,
-  DayMistSvg,
-  NightMistSvg,
-  DeleteSVG,
-} from './Svg';
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ClearIcon,
+  LogoIcon,
+  LogoTablet,
+  SearchIcon,
+  DirectionIcon,
+} from '../UI';
+import { createImg } from '../../utils/createImg';
+import Basket from '../UI/Icons/Basket/Basket';
 
-const svgComponents = {
-  logo: LogoSvg,
-  logoSmall: LogoSmallSvg,
-  search: SearchSvg,
-  close: CloseSvg,
-  delete: DeleteSVG,
-  arrowRight: ArrowRightSvg,
-  pressure: PressureSvg,
-  humidity: HumiditySvg,
-  sunrise: SunriseSvg,
-  sunset: SunsetSvg,
-  visibility: VisibilitySvg,
-  wind: WindSvg,
-  dayClearSky: DayClearSkySvg,
-  nightClearSky: NightClearSkySvg,
-  dayFewClouds: DayFewCloudsSvg,
-  nightFewClouds: NightFewCloudsSvg,
-  dayScatteredClouds: DayScatteredCloudsSvg,
-  nightScatteredClouds: NightScatteredCloudsSvg,
-  dayBrokenClouds: DayBrokenCloudsSvg,
-  nightBrokenClouds: NightBrokenCloudsSvg,
-  dayShowerRain: DayShowerRainSvg,
-  nightShowerRain: NightShowerRainSvg,
-  dayRain: DayRainSvg,
-  nightRain: NightRainSvg,
-  dayThunderstorm: DayThunderstormSvg,
-  nightThunderstorm: NightThunderstormSvg,
-  daySnow: DaySnowSvg,
-  nightSnow: NightSnowSvg,
-  dayMist: DayMistSvg,
-  nightMist: NightMistSvg,
+const icons = ({
+  icon = '',
+  className = '',
+  ext = 'png',
+  alt = 'Иконка',
+  rotation = 0,
+}) => {
+  switch (icon) {
+    case 'chevron-left':
+      return <ChevronLeftIcon className={className} />;
+
+    case 'chevron-right':
+      return <ChevronRightIcon className={className} />;
+
+    case 'clear':
+      return <ClearIcon className={className} />;
+
+    case 'search':
+      return <SearchIcon className={className} />;
+
+    case 'logo':
+      return <LogoIcon className={className} />;
+
+    case 'basket':
+      return <Basket />;
+
+    case 'logo-tablet':
+      return <LogoTablet className={className} />;
+
+    case 'direction':
+      return <DirectionIcon className={className} rotation={rotation} />;
+
+    default:
+      const src = require(`../../assets/${icon}.${ext}`);
+
+      if (!src) return '';
+
+      return createImg({ src, className, alt });
+  }
 };
 
-export const Icon = ({ name = 'close', ...props }) => {
-  const SvgComponent = svgComponents[name] || CloseSvg;
-  return <SvgComponent {...props} />;
+export const Icon = ({ className = '', icon = '', alt = '', rotation = 0 }) => {
+  return icon ? icons({ className, icon, alt, rotation }) : null;
 };

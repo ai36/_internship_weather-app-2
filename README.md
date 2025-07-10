@@ -40,6 +40,24 @@ We will have to work with legacy code from other developers after each task.
 + Number of task: 7
 + Technology: React, JS, HTML, CSS
 
+### Task 7
+
+According to the [layout](https://www.figma.com/file/qxasvzAq6iijrJ8NBPQOQd/Weather-App.-2-sprint.-7-task?type=design&node-id=4008-9369&mode=design&t=jH8KFelF7uucnlSP-0), create a Button component to control the menu items. Add this new component to the existing Slider component.
+
+- There should be scroll buttons on the left and right sides of the cards. When a button is clicked, the cards shift by one position.
+- The scrolling should be smooth. If the card is the first or last in the slider, the left or right arrow (respectively) should be inactive.
+
+### Task 6
+
+Retrieve additional weather data for the next 24 hours and the upcoming 5 days. To do this, use the API request:
+[API](https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric&lang=ru)
+
+Display the received data in the “Forecast” block cards according to the [layout](https://www.figma.com/file/Q8BX76RTx7NI7Qs5sSvNTy/Weather-App.-2-sprint.-6-task?type=design&node-id=4008-9369&mode=design&t=CmZMirDUJqSFCcyv-0).
+
+In the “24-hour” section, display the first 8 cards.
+
+In the “5-day” section, display 5 cards showing the minimum and maximum temperatures for each corresponding day. The icons should match the weather conditions.
+
 ### Task 5
 
 Configure the weather data output using the OpenWeatherMap API:
